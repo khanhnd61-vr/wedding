@@ -160,10 +160,6 @@
     <div class="blossom tl" id="blossom-tl"></div>
     <div class="blossom br" id="blossom-br"></div>
 
-    <!-- ===================================================================
-         Keep id="guest-name" so the guest name renders from the URL.
-         e.g. index.html?to=The%20Nguyen%20Family
-         =================================================================== -->
     <div class="card">
       <div class="keyline-outer">
         <div class="keyline-inner">
@@ -179,7 +175,7 @@
           <p class="prelude">Together with their families</p>
 
           <p class="greeting">Dear</p>
-          <h2 class="guest-name" id="guest-name">Our Cherished Guest</h2>
+          <h2 class="guest-name">Our Cherished Guest</h2>
 
           <h1 class="names">Phuong Uyen</h1>
           <div class="amp-row">
@@ -338,19 +334,10 @@ at the celebration of their marriage</p>
       var overlay = document.getElementById('rsvp-overlay');
       var openBtn = document.getElementById('rsvp-open');
       var closeBtn = document.getElementById('rsvp-close');
-      var nameInput = document.getElementById('rsvp-name');
       var attendRadios = document.querySelectorAll('input[name="attending"]');
       var guestsField = document.getElementById('rsvp-guests-field');
 
-      function open() {
-        // Pre-fill the name with the guest name from the URL.
-        var gn = document.getElementById('guest-name');
-        if (nameInput && gn && !nameInput.value) {
-          var name = gn.textContent.trim();
-          if (name && name !== 'Our Cherished Guest') nameInput.value = name;
-        }
-        overlay.classList.add('open');
-      }
+      function open() { overlay.classList.add('open'); }
       function close() { overlay.classList.remove('open'); }
 
       if (openBtn) openBtn.addEventListener('click', open);
@@ -367,18 +354,15 @@ at the celebration of their marriage</p>
       syncGuests();
     })();
 
-    // Read the guest name from the URL, e.g. index.html?to=John%20%26%20Mary
+    // Show day 1 details when the URL has ?day=1, e.g. index.html?day=1
+    // Default (no param or day=2) is day 2, which is what the HTML contains.
     (function () {
-      var params = new URLSearchParams(window.location.search);
-      var raw = params.get('to') || params.get('guest') || params.get('name');
-      if (raw) {
-        var clean = raw.replace(/<[^>]*>/g, '').trim();
-        if (clean.length > 0 && clean.length <= 80) {
-          var el = document.getElementById('guest-name');
-          if (el) el.textContent = clean;
-          document.title = clean + ' — Phuong Uyen & Dang Khanh';
-        }
-      }
+      if (new URLSearchParams(window.location.search).get('day') !== '1') return;
+      document.querySelector('.weekday').textContent = 'Friday';
+      document.querySelector('.day').textContent = '11';
+      document.querySelector('.venue').textContent = 'Thien Tan Restaurant';
+      document.querySelector('.address').textContent = '56E, Pham Thai Buong, Phuoc Hau, Vinh Long';
+      document.querySelector('.map-link').href = 'https://share.google/54rVBV5KiuWuwfAQn';
     })();
   </script>
 
@@ -453,7 +437,6 @@ at the celebration of their marriage</p>
         attending: attending === 'yes',
         guests: guests,
         message: form.elements.message.value.trim(),
-        invitedAs: new URLSearchParams(location.search).get('to') || '',
         createdAt: serverTimestamp()
       };
 
