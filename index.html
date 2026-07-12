@@ -6,7 +6,7 @@
 <title>Phuong Uyen &amp; Dang Khanh — You're Invited</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Mr+De+Haviland&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Mr+De+Haviland&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box}
   body{margin:0}
@@ -69,7 +69,7 @@
   .date-line{display:block; width:44px; height:1px; background:#e0b6c4}
   .weekday,.monthyear{margin:0; font-size:15px; letter-spacing:.34em; text-indent:.34em;
     text-transform:uppercase; color:#b98a9a}
-  .day{margin:8px 0; font-size:46px; line-height:1; font-weight:500; color:#a85b76}
+  .day{margin:8px 0; font-family:'Playfair Display',serif; font-size:46px; line-height:1; font-weight:500; color:#a85b76}
   .time{margin:0; text-align:center; font-size:20px; font-style:italic; color:#7d6068}
 
   .venue-block{text-align:center; margin-top:30px}
@@ -177,13 +177,13 @@
           <p class="greeting">Dear</p>
           <h2 class="guest-name">Our Cherished Guest</h2>
 
-          <h1 class="names">Phuong Uyen</h1>
+          <h1 class="names">Dang Khanh</h1>
           <div class="amp-row">
             <span class="amp-line"></span>
             <span class="amp">&amp;</span>
             <span class="amp-line"></span>
           </div>
-          <h1 class="names second">Dang Khanh</h1>
+          <h1 class="names second">Phuong Uyen</h1>
 
           <p class="request">request the pleasure of your company
 at the celebration of their marriage</p>
@@ -207,7 +207,7 @@ at the celebration of their marriage</p>
 
           <div class="footer">
             <button class="rsvp" id="rsvp-open" type="button">
-              <span>Kindly RSVP by August 1st</span>
+              <span>Kindly RSVP by September 1st</span>
             </button>
           </div>
 
@@ -232,7 +232,7 @@ at the celebration of their marriage</p>
 
           <form id="rsvp-form">
             <h2 class="rsvp-title" id="rsvp-title">RSVP</h2>
-            <p class="rsvp-sub">Kindly reply by August 1st</p>
+            <p class="rsvp-sub">Kindly reply by September 1st</p>
 
             <div class="rsvp-field">
               <label for="rsvp-name">Your name</label>
@@ -358,6 +358,8 @@ at the celebration of their marriage</p>
     // Default (no param or day=2) is day 2, which is what the HTML contains.
     (function () {
       if (new URLSearchParams(window.location.search).get('day') !== '1') return;
+      document.querySelector('.names').textContent = 'Phuong Uyen';
+      document.querySelector('.names.second').textContent = 'Dang Khanh';
       document.querySelector('.weekday').textContent = 'Friday';
       document.querySelector('.day').textContent = '11';
       document.querySelector('.venue').textContent = 'Thien Tan Restaurant';
